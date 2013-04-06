@@ -1,0 +1,45 @@
+\documentclass[a4paper]{ecustthesis}
+
+% !!非常重要!! 这份模版使用了很多xeTeX的宏包，如 xeXJK，fontspec 等，因
+% 此请使用xeTeX编译
+
+% 设定文献翻译相关信息
+\author{作者姓名}
+\class{作者班级}
+\studentNo{作者学号}
+\title{华东理工大学本科生毕业论文模版}
+\keywords{华东理工，毕业论文， 本科生， \LaTeX }
+
+
+% 可以按照个人的喜好自行设置字体
+% 自行设置字体可参考此处
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun}
+\setCJKfamilyfont{hei}{SimHei}
+% 请注意：很多中文字体没有粗体的概念，因此在TeX中简单地使用\textbf是
+% 不会出现粗体的（摊手），最好使用有独立的粗体和斜体的中文字体。如果使
+% 用的字体粗体和斜体是单独的名称，请参考下面格式进行引用。
+
+\begin{document}
+% 设置中文缩进
+\setlength{\parindent}{2em}
+% 设置标点符号挤压模式为半角，可选项有半角、全角、行末半角和开明
+\punctstyle{banjiao}
+
+% 模版使用形式和普通article类一样
+% - 使用\maketitle命令显示标题；
+% - 使用\section{}命令开始一个章节；
+% - 使用\subsection{}开始一个子章节；
+% - 使用\subsubsection{}开始一个孙章节；
+
+\maketitle
+
+% - 使用\begin{cAbstract} 和 end{cAbstract} 来开始和结束中文摘要
+%   模版会自动加载关键词。
+\begin{abstract}
+  这是一份用于华东理工大学毕业环节的论文模版，主要包括了文献翻译、开题报告和论文正文的模版。
+\end{abstract}
+
+\section{导论}
+
+\end{document}
