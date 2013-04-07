@@ -1,0 +1,3 @@
+% !!非常重要!! 这份模版使用了很多xeTeX的宏包，如 xeXJK，fontspec 等，因
+% 此请使用xeTeX编译
+

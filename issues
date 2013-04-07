@@ -1,0 +1,54 @@
+pending issue #1
+-----------------
+title  \title 命令
+date   2013/04/07
+detail 目前标题存在问题：
+       - \ECUSTtitle 命令并没有定义文章标题，因此需要重复定义\title。建
+         议直接使用\title命令，这样更加直观。页眉可以使用\thetile 命令获
+	 得文章标题。
+       - 大标题应为黑体加粗。默认黑体字体 SimHei 只有 Regular 一种字形，
+       	 LaTeX 不会给出*自动加粗的粗体*，需要指定黑体的粗体字体。
+
+pending issue #2
+-----------------
+title  abstract 和 keywords
+date   2013/04/07
+detail 目前摘要部分是通过 \ECUSTabstract 和 \ECUSTkeywords 两个命令实
+       现的。最好能修改为重载 abstract 环境，自动加载关键词的形式。
+
+pending issue #3
+-----------------
+title  \maketitle
+date   2013/04/07
+detail 目前 \maketitle 命令没有打印出作者的学号和班级，应该添加定义学号和班级
+       的命令。
+
+pending issue #4
+-----------------
+title  间距控制
+date   2013/04/07
+detail 目前模板
+       - 页眉、页脚的高度
+       - 标题和页眉之间间距
+       - 标题和作者信息之间间距
+       存在和学校模板不一致的地方。
+
+pending issue #5
+-----------------
+title  命令命名
+date   2013/04/07
+detail 希望将目前使用的 \ECUSTtitle，\ECUSTabstract，\ECUSTkeywords
+       等命令修改为 article 类中常用的 \title \abstract \keywords 命
+       令。
+
+pending issue #6
+-----------------
+title  说明文档
+date   2013/04/07
+detail * 尽快完成说明文件 README.md
+       	 - 缺少项目目标
+       	 - 缺少模板使用的详细说明
+       * 尽快完成 contents
+       * 尽快完成 contributors
+       
+[+]
