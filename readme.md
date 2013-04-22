@@ -1,35 +1,65 @@
-#华东理工大学本科生毕业论文模版#
+EcustThesis
+-----------
 
-这是一份用于华东理工大学本科生毕业论文的 LaTeX 模板，包括：文献翻译、开
-题报告和毕业论文的模版。
+## Abstract
+
+EcustThesis is a set of `LaTeX` templates for bachelor thesis in East
+China University of Science and Technology (ECUST). It is design to
+help you dealing with the format of your thesis. With the help of this
+templates, you save your time on repeatingly formating your
+papers. Currently, 3 templates are available: `Traslating`, `Openning`
+and `Thesis`.
 
 
-##目标## 
+EcustThesis 是一份用于华东理工大学本科生毕业论文的 `LaTeX` 模板，可以帮
+助论文作者更专注于论文内容，而将论文的排版交由程序自动处理。目前 EcustThesis
+包括了用于`文献翻译`、`开题报告`和`毕业论文`用途的模版，使用者可以根据
+需要进行选择。
 
-##目前进度##
 
-目前初步完成了文献翻译的模版,接下来需要完成开题报告模版和
-毕业论文模版。欢迎有兴趣一起维护的童鞋 fork 本项目 :)
+## Objectives
 
-##模版的使用方法##
+EcustThesis 的主要目标是为华东理工大学本科毕业生提供一套用于毕业设计的
+模板，该模板的排版符合华东理工大学对本科生毕业论文的要求，且使用上接近
+`LaTeX` 的 `article` 类，即使是 `LaTeX` 的初学者也能轻松上手。
 
-  ###下载模版###
-  * 使用 windows 的童鞋，请点击上方的 *Zip 下载* 下载本模版；
-  * 使用 linux/mac 的同学欢迎直接 clone 源码（当然也可以直接下载）：
 
-    git init
+## Current Progress
 
-    git clone "https://github.com/scottoasisa/ecustthesis.git"
+目前，EcustThesis 处于制作中，
 
-  ###使用模版###
-  
 
-  ###编译输出###
-  * 使用 TeXWorks 这类专用编辑器的童鞋请选择 XeLaTeX 然后运行即可；
-  * 喜欢用命令行的同学请在终端输入：（当然得在包含模版的目录下）
 
-	xelatex sample.tex
+## How It Works
 
-##错误报告##
-##版本更新##
-##参与模版的制作##
+
+### Up and Running
+
+
+### A Little Advanced Topics
+
+
+### Getting Support
+
+
+### Get More Interaction
+
+
+### Error & Issues
+
+
+
+## Licensing & Contributting
+
+EcustThesis 是一个自由的开源项目，她遵循 `GNU Public License (GPL)`
+协议。这意味着 EcustThesis 是自由、免费的，然而其开发者们**无法**为您由于使用
+EcustThesis 造成的损失承担责任。
+
+> Copyright (c) 2013 EcustThesis team. You may not use this software
+> except _in compliance with license_. You can obtain a copy of
+> licence at [gnu.org](http://www.gnu.org/licenses/gpl.html). If you
+> have any question, please feel free to contact us at
+> [@ecustthesis](ecustthesis@gmail.com).
+
+此外，
+
