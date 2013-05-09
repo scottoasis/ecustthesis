@@ -66,44 +66,61 @@
   \ifnum \c@section>\z@ \thesection-\fi\@arabic\c@equation}
 
 
-%  定义图表标注的格式，字号为小五号，标号和标注之间用非断句空格符[non-breakable space](~)
-%  分割；
+%  图表标注的格式，字号为小五号，标号和标注之间用非断句空格符[non-breakable space](~)分割；
 \renewcommand{\captionlabeldelim}{~}
 \renewcommand{\captionfont}{\bf\zihao{-5}}
 \captionsetup{labelsep=quad}
 
-%  定义页面布局
+%  页面布局
 \geometry{left=2.5cm,right=2.5cm,top=2.8cm,bottom=2.5cm,headsep=0.6cm}
 
-%  定义行间距为1.35倍，大致相当于 wrod 的1.5倍行距；
+%  行间距为1.35倍，大致相当于 wrod 的1.5倍行距；
 \renewcommand{\baselinestretch}{1.35}
 
-%  定义段间距
+%  段间距，参考文献和列表条目间距
 \setlength{\parskip}{0pt}
-
-%  定义参考文献条目间距
 \setlength{\bibsep}{0pt}
-
-%  定义列表条目间距
 \setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=0pt,topsep=0pt}
 
-%  定义标题
+%  标题
 \newcommand{\ECUSTtitle}[1]{\def\ECUST@title{#1}}
 \newcommand{\ECUSTtype}[1]{\def\ECUST@type{#1}}
+\renewcommand\maketitle{
 
-%  定义摘要环境
-\newenvironment{abstract}{
+}
+
+%% ==== 定义摘要和关键词的样式 ====
+%  定义关键词
+\newcommand\keywords[2]{
+  \ifthenelse{\equal{#1}{chinese}}{
+    \newcommand\chinesekeywords{#2}}{
+    \newcommand\englishkeywords{#2}}
+}
+
+%  论文正文摘要部分的样式
+\newenvironment{abstract}[1][0]{
+  \ifthenelse{\equal{#1}{chinese}}{
+    \newcommand\theabstract{{\zihao{2}\heiti 摘要}}
+    \newcommand\thekeywords{{\heiti 关键词 }}
+    \newcommand\@keywords{\chinesekeywords}}{
+    \newcommand\theabstract{{\Large\bf Abstract}}
+    \newcommand\thekeywords{{\bf Keywords} }
+    \newcommand\@keywords{\englishkeywords}}
+  \clearpage
+  \vspace*{90pt}
+  {\center \theabstract\\}\vspace{12pt}}{
+  \vspace{12pt} \\
   \noindent
-  {\heiti 摘要：}}{
-  \vspace{0.2em} \\
-  \noindent
-  {\heiti 关键词：}\@keywords
+  \thekeywords \@keywords
   \vspace{1.2em}
 }
 
-%  定义
-\newcommand\keywords[1]{
-  \def\@keywords{#1} }
+%  开题报告、文献翻译摘要样式
+\ifopenning
+\renewenvironment{abstract}{
+  \noindent {\heiti 摘要：}}{\vspace{0.2em} \\
+  \noindent {\heiti 关键词：}\@keywords \vspace{1.2em}
+} \fi
 
 \newcommand{\ECUSTabstract}{\noindent\heiti摘要\songti：}
 \newcommand{\ECUSTkeywords}{\noindent\heiti关键词\songti：}
@@ -125,7 +142,7 @@
   \end{figure}
 }
 
-%  章节标题格式设置
+%  章节标题格式
 \CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp},titleformat={\thispagestyle{fancy}\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
 \CTEXsetup[format={\centering\zihao{-2}\heiti},beforeskip={12bp},afterskip={18bp}]{section}
 \CTEXsetup[format={\zihao{4}\songti},beforeskip={18bp},afterskip={18bp}]{subsection}
