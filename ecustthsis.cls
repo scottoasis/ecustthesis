@@ -13,8 +13,10 @@
 %  openning    - 开题报告
 \newif\iftranslation\translationfalse
 \newif\ifopenning\openningfalse
+\newif\ifthesis\thesisfalse
 \DeclareOption{translation}{\translationtrue}
 \DeclareOption{openning}{\openningtrue}
+\DeclareOption{thesis}{\thesistrue}
 
 \ProcessOptions\relax
 
@@ -36,6 +38,9 @@
 
 %参考文献格式
 \bibliographystyle{GBT7714-2005NLang-UTF8}
+
+\titlecontents{section}[0pt]{}{\bf\zihao{4}\thecontentslabel~~}{}{\titlerule*[4pt]{.}\thecontentspage}
+\titlecontents{subsection}[0pt]{\vspace*{0pt}}{\bf\thecontentslabel~~}{}{\titlerule*[4pt]{.}\thecontentspage}
 
 %论文标题
 \pretitle{\centering\vskip -50bp\zihao{-2}\heiti}
@@ -121,8 +126,14 @@
 }
 
 %章节标题格式设置
-\CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp},titleformat={\thispagestyle{fancy}\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
+\CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp},titleformat={\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
+
+\ifthesis
+\CTEXsetup[format={\clearpage\centering\zihao{-2}\heiti},beforeskip={12bp},afterskip={18bp}]{section}
+\else
 \CTEXsetup[format={\centering\zihao{-2}\heiti},beforeskip={12bp},afterskip={18bp}]{section}
+\fi
+
 \CTEXsetup[format={\zihao{4}\songti},beforeskip={18bp},afterskip={18bp}]{subsection}
 \CTEXsetup[format={\zihao{-4}}\heiti,beforeskip={18bp},afterskip={18bp}]{subsubsection}
 \setcounter{secnumdepth}{4}
@@ -137,6 +148,7 @@
 %% 设置
 \iftranslation \ECUSTtype{（文献翻译）} \fi
 \ifopenning \ECUSTtype{（开题报告）} \fi
+\ifthesis \ECUSTtype{(毕业论文)} \fi
 
 %% 页眉格式：
 %    - 左上角是课题名，右上角是页码；页眉有下划线。
