@@ -34,9 +34,11 @@ and `Thesis`.
 
 ### Versions
 
-1.0.1 - __Current__ 修缮了文档。
+1.05 - __Current__ 添加了正式论文的封面和摘要部分。
 
-1.0.0 - 项目初始版本。决定了模板采用 `ctex`;合并了
+1.01 - 修缮了文档。
+
+1.00 - 项目初始版本。决定采用 `ctex`;合并了
       	[@raychenfj](https://github.com/raychenfj) 和
       	[@scottoasis](https://github.com/scottoasis) 的模板。
 
