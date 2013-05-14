@@ -1,32 +1,34 @@
 \ProvidesClass{ecustthesis}[2013/05/09 ver. 1.05 SNAPSHOT]
 % == ECUST bachelors thesis template, V1.05, last modified at 2013-05-14 == %
 \NeedsTeXFormat{LaTeX2e}
-
-%% ==== basic options ====
-%  cs4size - default fontsize `xiao 4`
-%  a4paper - page size A4
-%  oneside - no difference for oadd and even pages
-\LoadClass[cs4size,a4paper,oneside]{ctexbook}
-
-%% ==== optional parameter for different templates ====
-%  translation - 文献翻译
-%  openning    - 开题报告
-%  no-params   - 正式论文
+\LoadClass[cs4size,a4paper,oneside]{ctexart}
+%
+%% ==== Use This Template ====
+%  \documentclass[<optional parameter>]{ecustthesis}
+%
+%  optional parameter for different templates
+%   translation -> 文献翻译
+%   openning    -> 开题报告
+%   no-params   -> 正式论文
 %
 
-%% ==== GLOBAL DEF ===
+%% ==== GLOBAL DEFINITIONS ===
 %
-%  thesis type
-\newcommand\thesistype[1]{\def\thesis@type{#1}}
+%  Global var definition: \thesis@<var-name>, \thesis@type forexample
+%  
 \newif\iftranslation\translationfalse
 \newif\ifopenning\openningfalse
+\newcommand\thesistype[1]{\def\thesis@type{#1}}
 \iftranslation \thesistype{（文献翻译）} \fi
 \ifopenning \thesistype{（开题报告）} \fi
 
+%% !==== NEED COMMENTS ====!
 \DeclareOption{translation}{\translationtrue}
 \DeclareOption{openning}{\openningtrue}
+
 \ProcessOptions\relax
 
+%% ==== require packages ====
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
 \RequirePackage{chngcntr}
@@ -93,9 +95,13 @@
 
 %% ==== SPECIFIC STYLES ====
 %
-%  ==== Table-of-Contents =====
-\titlecontents{section}[0pt]{}{\bf\zihao{4}\thecontentslabel~~}{}{\titlerule*[4pt]{.}\thecontentspage}
-\titlecontents{subsection}[0pt]{\vspace*{0pt}}{\bf\thecontentslabel~~}{}{\titlerule*[4pt]{.}\thecontentspage}
+%  ==== Table-of-contents style =====
+\titlecontents{section}[0pt]{}
+              {\heiti \zihao{4}\thecontentslabel~~}{}
+              {\titlerule*[4pt]{.} \thecontentspage \vspace{1em} }
+\titlecontents{subsection}[0pt]{\vspace*{0pt}}
+              {\heiti \thecontentslabel~~}{}
+              {\titlerule*[4pt]{.}\thecontentspage}
 
 %  ==== Titile =====
 \pretitle{\centering\vskip -50bp\zihao{-2}\heiti}
@@ -104,16 +110,13 @@
 \postauthor{\par\vskip 18pt}
 \predate{\vskip 0pt}
 \postdate{\vskip -20bp}
+
 \renewcommand\maketitle{
    \maketitlehooka
     {\@bspretitle \@title \@bsposttitle}
     \maketitlehookb
     {\@bspreauthor \@author \@bspostauthor}
     \maketitlehookc
-}
-
-\renewcommand\maketitle{
-
 }
 
 %% ==== Cover ====
@@ -148,6 +151,7 @@
 
 
 %% ==== Abstract and Keywords ====
+%
 %  def keywords command
 %  \keywords{<LANGUAGE>}{<KEYWORDS>}
 \newcommand\keywords[2]{
@@ -163,20 +167,20 @@
 %  （注：模板终申明`摘要`二字应为小二号,然而实际模板中字号更接近二号字）
 %  摘要正文结束后。空 12pt 然后开始关键字。`关键字`和关键字正文，
 %  以及摘要正文的字体大小均为小四号（默认大小）。
-\newenvironment{abstract}[1][0]{
+\renewenvironment{abstract}[1][0]{
   \ifthenelse{\equal{#1}{chinese}}{
     \newcommand\theabstract{{\zihao{2}\heiti 摘要}}
     \newcommand\thekeywords{{\heiti 关键词 }}
-    \newcommand\@keywords{\chinesekeywords}}{
+    \newcommand\thesis@keywords{\chinesekeywords}}{
     \newcommand\theabstract{{\Large\bf Abstract}}
     \newcommand\thekeywords{{\bf Keywords} }
-    \newcommand\@keywords{\englishkeywords}}
+    \newcommand\thesis@keywords{\englishkeywords}}
   \clearpage
   \vspace*{90pt}
   {\center \theabstract\\}\vspace{12pt}}{
   \vspace{12pt} \\
   \noindent
-  \thekeywords ~ \@keywords
+  \thekeywords ~ \thesis@keywords
   \vspace{1.2em}
 }
 
@@ -184,19 +188,21 @@
 \ifopenning
 \renewenvironment{abstract}{
   \noindent {\heiti 摘要：}}{\vspace{0.2em} \\
-  \noindent {\heiti 关键词：}\@keywords \vspace{1.2em}
+  \noindent {\heiti 关键词：}\chinesekeywords \vspace{1.2em}
 } \fi
 
 %% ==== Sections ====
 %  section, subsection styles
-\CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp},titleformat={\thispagestyle{fancy}\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
+% \CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp}, titleformat={\thispagestyle{fancy}\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
+\newcommand\sectionbreak{\clearpage}
+\ifopenning \renewcommand\sectionbreak{} \fi
 \CTEXsetup[format={\centering\zihao{-2}\heiti},beforeskip={12bp},afterskip={18bp}]{section}
 \CTEXsetup[format={\zihao{4}\songti},beforeskip={18bp},afterskip={18bp}]{subsection}
 \CTEXsetup[format={\zihao{-4}}\heiti,beforeskip={18bp},afterskip={18bp}]{subsubsection}
 \setcounter{secnumdepth}{4}
 
 %  section numbering
-\counterwithout{section}{chapter}
+% \counterwithout{section}{chapter}
 
 
 
