@@ -75,8 +75,8 @@
   \fancyhead[R]{\thepage}
   \fancyfoot[C]{}
 }
-\pagestyle{empty}
-
+\pagestyle{plain}
+\pagenumbering{Roman}
 
 
 %% ---- caption for Fig, Tab and Equations ----
