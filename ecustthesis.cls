@@ -3,7 +3,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \LoadClass[cs4size,a4paper,oneside]{ctexart}
 %
-%% ==== Use This Template ====
+%% ---- Use This Template ----
 %  \documentclass[<optional parameter>]{ecustthesis}
 %
 %  optional parameter for different templates
@@ -23,6 +23,15 @@
 \iftranslation \thesistype{（文献翻译）} \fi
 \ifopenning \thesistype{（开题报告）} \fi
 
+%% ---- author meta data ----
+\newcommand\class[1]{\def\author@class{#1}}
+\newcommand\studentnumber[1]{\def\author@studentnumber{#1}}
+\newcommand\college[1]{\def\author@college{#1}}
+\newcommand\department[1]{\def\author@department{#1}}
+\newcommand\major[1]{\def\author@major{#1}}
+\newcommand\yearenrolled[1]{\def\author@yearenrolled{#1}}
+\newcommand\mentor[1]{\def\author@mentor{#1}}
+
 
 %% !==== NEED COMMENTS ====!
 \DeclareOption{translation}{\translationtrue}
@@ -30,7 +39,7 @@
 
 \ProcessOptions\relax
 
-%% ==== require packages ====
+%% ---- require packages ----
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
 \RequirePackage{chngcntr}
@@ -51,6 +60,7 @@
 %  add support for bibtex and specific reference style
 \bibliographystyle{GBT7714-2005NLang-UTF8}
 
+
 %% ==== GLOBAL STYLES ====
 
 %  default font for Western Characters
@@ -65,10 +75,11 @@
   \fancyhead[R]{\thepage}
   \fancyfoot[C]{}
 }
+\pagestyle{empty}
 
 
 
-%% ==== caption for Fig, Tab and Equations ====
+%% ---- caption for Fig, Tab and Equations ----
 %  figure   - 图 (3-2) 
 %  tablar   - 表 (3.2) 
 %  equation - (3-2)
@@ -109,7 +120,7 @@
 
 %% ==== SPECIFIC STYLES ====
 %
-%  ==== Table-of-contents style =====
+%  ---- Table-of-contents style -----
 \titlecontents{section}[0pt]{\vspace{0.8em}}
               {\heiti \zihao{4}\thecontentslabel~~}{}
               {\titlerule*[4pt]{.} \thecontentspage \vspace{0.4em}}
@@ -117,7 +128,7 @@
               {\heiti \thecontentslabel~~}{}
               {\titlerule*[4pt]{.}\thecontentspage}
 
-%  ==== Titile =====
+%  ---- Titile -----
 \pretitle{\centering\vskip -50bp\zihao{-2}\heiti}
 \posttitle{\par\vskip 0pt}
 \preauthor{\centering\vskip 18bp\zihao{4}\heiti}
@@ -133,38 +144,46 @@
     \maketitlehookc
 }
 
-%% ==== Cover ====
+%% ---- Cover ----
 %
-\newcommand{\cover}{
+\newcommand{\coveritem}[2]{
+  \makebox[2.5cm]{{\bf\zihao{-2}#1}}\quad\underline{\makebox[7cm]{\zihao{-2}\kaishu #2}}
+}
+\newcommand{\makecover}{
   \begin{titlepage}
-    \begin{picture}(0,0)(75,230)
-      \includegraphics{Figures/title.png}
-    \end{picture}
     
-    \vspace{9.5cm}
+    \begin{picture}(0,0)(-75,94)
+      \includegraphics[width=0.56\textwidth]{img/ecust_logo.png}
+    \end{picture}
 
+    \vspace*{120pt}
+
+    \begin{center}
+      {\zihao{0} \heiti \bf 毕业设计（论文）}
+    \end{center}
+    \vspace{60pt}
+    
     \renewcommand{\arraystretch}{1.65}
     \centerline{
       \begin{tabular}{c}
-	\coveritem{题\quad\quad目}{\cover@titlea}\\
-	\coveritem{ }{\cover@titleb}\\
-	\coveritem{学\quad\quad院}{\cover@academy}\\
-	\coveritem{系\quad\quad别}{\cover@dept}\\
-	\coveritem{专\quad\quad业}{\cover@major}\\
-	\coveritem{年\quad\quad级}{\cover@grade}\\
-	\coveritem{学\quad\quad号}{\cover@num}\\
-	\coveritem{姓\quad\quad名}{\cover@name}\\
-	\coveritem{导\quad\quad师}{\cover@mentor}
+	\coveritem{题\quad\quad目}{\@title}\\
+	\coveritem{学\quad\quad院}{\author@college}\\
+	\coveritem{系\quad\quad别}{\author@department}\\
+	\coveritem{专\quad\quad业}{\author@major}\\
+	\coveritem{年\quad\quad级}{\author@yearenrolled}\\
+	\coveritem{学\quad\quad号}{\author@studentnumber}\\
+	\coveritem{姓\quad\quad名}{\author}\\
+	\coveritem{导\quad\quad师}{\author@mentor}
       \end{tabular}}
 
       \vspace{3.2cm}
 
-      \centerline{\makebox[2.5cm]{\bf\zihao{-2}定稿日期：}\makebox[7cm]{\zihao{-2}\cover@date}}
+      \centerline{\makebox[2.5cm]{\bf\zihao{-2}定稿日期：}\makebox[7cm]{\zihao{-2} \@date}}
     \end{titlepage}
 }
 
 
-%% ==== Abstract and Keywords ====
+%% ---- Abstract and Keywords ----
 %
 %  def keywords command
 %  \keywords{<LANGUAGE>}{<KEYWORDS>}
@@ -174,7 +193,7 @@
     \newcommand\englishkeywords{#2}}
 }
 
-%% ==== Abstract and Keywords style ====
+%% ---- Abstract and Keywords style ----
 %
 %  style of thesis
 %  摘要段前距为 102pt，`摘要`或`Abstract`居中，大小为小二号/Large
@@ -205,10 +224,10 @@
   \noindent {\heiti 关键词：}\chinesekeywords \vspace{1.2em}
 } \fi
 
-%% ==== Sections ====
+%% ---- Sections ----
 %  section, subsection styles
 % \CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp}, titleformat={\thispagestyle{fancy}\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
-\newcommand\sectionbreak {
+\newcommand\sectionbreak{
   \clearpage
   \ifnum \c@section=1
   \pagestyle{ecustthesis}
@@ -222,10 +241,10 @@
 \setcounter{secnumdepth}{4}
 
 
-%% ==== Refereces ====
+%% ---- Refereces ----
 
 
-%% ==== Acknowledge ====
+%% ---- Acknowledge ----
 %  add acknowledge at last
 \newcommand\acknowledge{\section*{致谢}}
 
@@ -269,5 +288,3 @@
 %\fancyfoot{}
 %\lhead{\zihao{5}\ECUST@title\ECUST@type}
 %\rhead{\thepage}
-
-
