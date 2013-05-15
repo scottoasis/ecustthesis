@@ -19,8 +19,10 @@
 \newif\iftranslation\translationfalse
 \newif\ifopenning\openningfalse
 \newcommand\thesistype[1]{\def\thesis@type{#1}}
+\def\thesis@type{}
 \iftranslation \thesistype{（文献翻译）} \fi
 \ifopenning \thesistype{（开题报告）} \fi
+
 
 %% !==== NEED COMMENTS ====!
 \DeclareOption{translation}{\translationtrue}
@@ -57,6 +59,13 @@
 %  geometry for page
 \geometry{left=2.5cm,right=2.5cm,top=2.8cm,bottom=2.5cm,headsep=0.6cm}
 
+%  thesis page style
+\fancypagestyle{ecustthesis}{
+  \fancyhead[L]{\zihao{5}{\@title \thesis@type }}
+  \fancyhead[R]{\thepage}
+  \fancyfoot[C]{}
+}
+
 
 
 %% ==== caption for Fig, Tab and Equations ====
@@ -64,17 +73,22 @@
 %  tablar   - 表 (3.2) 
 %  equation - (3-2)
 %
+\makeatletter
 \@addtoreset{figure}{section}
 \renewcommand{\thefigure}{
-  \ifnum \c@section>\z@ \thesection-\fi\@arabic\c@figure}
+  \ifnum \c@section>\z@ \thesection - \fi\@arabic\c@figure}
 
 \@addtoreset{table}{section}
 \renewcommand{\thetable}{
-  \ifnum \c@section>\z@ \thesection.\fi\@arabic\c@table}
+  \ifnum \c@section>\z@ \thesection . \fi\@arabic\c@table}
 
 \@addtoreset{equation}{section}
 \renewcommand{\theequation}{
-  \ifnum \c@section>\z@ \thesection-\fi\@arabic\c@equation}
+  \ifnum \c@section>\z@ \thesection - \fi\@arabic\c@equation}
+
+%% ==== citation styles ====
+% uper-scrinpt citations
+
 
 %  figure and table delimination
 \renewcommand{\captionlabeldelim}{~}
@@ -96,9 +110,9 @@
 %% ==== SPECIFIC STYLES ====
 %
 %  ==== Table-of-contents style =====
-\titlecontents{section}[0pt]{}
+\titlecontents{section}[0pt]{\vspace{0.8em}}
               {\heiti \zihao{4}\thecontentslabel~~}{}
-              {\titlerule*[4pt]{.} \thecontentspage \vspace{1em} }
+              {\titlerule*[4pt]{.} \thecontentspage \vspace{0.4em}}
 \titlecontents{subsection}[0pt]{\vspace*{0pt}}
               {\heiti \thecontentslabel~~}{}
               {\titlerule*[4pt]{.}\thecontentspage}
@@ -194,12 +208,26 @@
 %% ==== Sections ====
 %  section, subsection styles
 % \CTEXsetup[number={},name={,},beforeskip={-25bp},afterskip={18bp}, titleformat={\thispagestyle{fancy}\setcounter{section}{0}\normalfont\zihao{-2}\heiti}]{chapter}
-\newcommand\sectionbreak{\clearpage}
+\newcommand\sectionbreak {
+  \clearpage
+  \ifnum \c@section=1
+  \pagestyle{ecustthesis}
+  \pagenumbering{arabic}
+  \fi }
+
 \ifopenning \renewcommand\sectionbreak{} \fi
 \CTEXsetup[format={\centering\zihao{-2}\heiti},beforeskip={12bp},afterskip={18bp}]{section}
 \CTEXsetup[format={\zihao{4}\songti},beforeskip={18bp},afterskip={18bp}]{subsection}
 \CTEXsetup[format={\zihao{-4}}\heiti,beforeskip={18bp},afterskip={18bp}]{subsubsection}
 \setcounter{secnumdepth}{4}
+
+
+%% ==== Refereces ====
+
+
+%% ==== Acknowledge ====
+%  add acknowledge at last
+\newcommand\acknowledge{\section*{致谢}}
 
 %  section numbering
 % \counterwithout{section}{chapter}
