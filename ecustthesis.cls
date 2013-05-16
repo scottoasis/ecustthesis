@@ -48,7 +48,7 @@
 \RequirePackage[nooneline,center]{caption2}
 \RequirePackage{multirow}
 \RequirePackage{titling}
-\RequirePackage[numbers]{natbib}
+\RequirePackage[numbers, super]{natbib}
 \RequirePackage{ifthen}
 \RequirePackage{verbatim}
 \RequirePackage{amsmath}
@@ -87,15 +87,15 @@
 \makeatletter
 \@addtoreset{figure}{section}
 \renewcommand{\thefigure}{
-  \ifnum \c@section>\z@ \thesection - \fi\@arabic\c@figure}
+  \ifnum \c@section>\z@ \thesection -\fi\@arabic\c@figure}
 
 \@addtoreset{table}{section}
 \renewcommand{\thetable}{
-  \ifnum \c@section>\z@ \thesection . \fi\@arabic\c@table}
+  \ifnum \c@section>\z@ \thesection .\fi\@arabic\c@table}
 
 \@addtoreset{equation}{section}
 \renewcommand{\theequation}{
-  \ifnum \c@section>\z@ \thesection - \fi\@arabic\c@equation}
+  \ifnum \c@section>\z@ \thesection -\fi\@arabic\c@equation}
 
 %% ==== citation styles ====
 % uper-scrinpt citations
@@ -127,6 +127,7 @@
 \titlecontents{subsection}[0pt]{\vspace*{0pt}}
               {\heiti \thecontentslabel~~}{}
               {\titlerule*[4pt]{.}\thecontentspage}
+\setcounter{tocdepth}{2}              
 
 %  ---- Titile -----
 \pretitle{\centering\vskip -50bp\zihao{-2}\heiti}
