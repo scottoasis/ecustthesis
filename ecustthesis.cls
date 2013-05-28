@@ -19,9 +19,16 @@
 \newif\iftranslation\translationfalse
 \newif\ifopenning\openningfalse
 \newcommand\thesistype[1]{\def\thesis@type{#1}}
-\def\thesis@type{}
-\iftranslation \thesistype{（文献翻译）} \fi
-\ifopenning \thesistype{（开题报告）} \fi
+\thesistype{}
+
+\iftranslation
+\thesistype{（文献翻译）}
+\fi
+
+\ifopenning
+\thesistype{（开题报告）} 
+\fi
+
 
 %% ---- author meta data ----
 \newcommand\class[1]{\def\author@class{#1}}
@@ -78,6 +85,10 @@
 \pagestyle{plain}
 \pagenumbering{Roman}
 
+\ifopenning
+\pagestyle{ecustthesis}
+\pagenumbering{arabic}
+\fi
 
 %% ---- caption for Fig, Tab and Equations ----
 %  figure   - 图 (3-2) 
@@ -189,10 +200,16 @@
 %  def keywords command
 %  \keywords{<LANGUAGE>}{<KEYWORDS>}
 \newcommand\keywords[2]{
-  \ifthenelse{\equal{#1}{chinese}}{
-    \newcommand\chinesekeywords{#2}}{
-    \newcommand\englishkeywords{#2}}
+  \ifthenelse{\equal{#1}{english}}{
+    \def\englishkeywords{#2}}
+{
+    \def\chinesekeywords{#2}} 
 }
+
+\ifopenning 
+  \renewcommand\keywords[1]{
+    \def\thekeywords{#1} }
+\fi
 
 %% ---- Abstract and Keywords style ----
 %
@@ -203,12 +220,13 @@
 %  以及摘要正文的字体大小均为小四号（默认大小）。
 \renewenvironment{abstract}[1][0]{
   \ifthenelse{\equal{#1}{chinese}}{
-    \newcommand\theabstract{{\zihao{2}\heiti 摘要}}
-    \newcommand\thekeywords{{\heiti 关键词 }}
-    \newcommand\thesis@keywords{\chinesekeywords}}{
-    \newcommand\theabstract{{\Large\bf Abstract}}
-    \newcommand\thekeywords{{\bf Keywords} }
-    \newcommand\thesis@keywords{\englishkeywords}}
+    \def\theabstract{{\zihao{2}\heiti 摘要}}
+    \def\thekeywords{{\heiti 关键词 }}
+    \def\thesis@keywords{\chinesekeywords}}
+{
+    \def\theabstract{{\Large\bf Abstract}}
+    \def\thekeywords{{\bf Keywords} }
+    \def\thesis@keywords{\englishkeywords}}
   \clearpage
   \vspace*{90pt}
   {\center \theabstract\\}\vspace{12pt}}{
@@ -221,8 +239,9 @@
 %  style for translation and openning
 \ifopenning
 \renewenvironment{abstract}{
-  \noindent {\heiti 摘要：}}{\vspace{0.2em} \\
-  \noindent {\heiti 关键词：}\chinesekeywords \vspace{1.2em}
+  \noindent {\heiti 摘要：}}{
+  \vspace{0.2em} \\
+  \noindent {\heiti 关键词：}\thekeywords \vspace{1.2em}
 } \fi
 
 %% ---- Sections ----

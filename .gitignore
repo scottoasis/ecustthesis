@@ -1,5 +1,7 @@
 test
 *.aux
+*.toc
+*.out
 *.log
 *.dvi
 *.pdf
