@@ -8,7 +8,7 @@
 %
 %  optional parameter for different templates
 %   translation -> 文献翻译
-%   openning    -> 开题报告
+%   opening    -> 开题报告
 %   no-params   -> 正式论文
 %
 
@@ -17,7 +17,7 @@
 %  Global var definition: \thesis@<var-name>, \thesis@type forexample
 %  
 \newif\iftranslation\translationfalse
-\newif\ifopenning\openningfalse
+\newif\ifopening\openingfalse
 \newcommand\thesistype[1]{\def\thesis@type{#1}}
 \thesistype{}
 
@@ -25,7 +25,7 @@
 \thesistype{（文献翻译）}
 \fi
 
-\ifopenning
+\ifopening
 \thesistype{（开题报告）} 
 \fi
 
@@ -42,7 +42,7 @@
 
 %% !==== NEED COMMENTS ====!
 \DeclareOption{translation}{\translationtrue}
-\DeclareOption{openning}{\openningtrue}
+\DeclareOption{opening}{\openingtrue}
 
 \ProcessOptions\relax
 
@@ -85,7 +85,7 @@
 \pagestyle{plain}
 \pagenumbering{Roman}
 
-\ifopenning
+\ifopening
 \pagestyle{ecustthesis}
 \pagenumbering{arabic}
 \fi
@@ -206,7 +206,7 @@
     \def\chinesekeywords{#2}} 
 }
 
-\ifopenning 
+\ifopening 
   \renewcommand\keywords[1]{
     \def\thekeywords{#1} }
 \fi
@@ -236,8 +236,8 @@
   \vspace{1.2em}
 }
 
-%  style for translation and openning
-\ifopenning
+%  style for translation and opening
+\ifopening
 \renewenvironment{abstract}{
   \noindent {\heiti 摘要：}}{
   \vspace{0.2em} \\
@@ -254,7 +254,7 @@
   \pagenumbering{arabic}
   \fi }
 
-\ifopenning \renewcommand\sectionbreak{} \fi
+\ifopening \renewcommand\sectionbreak{} \fi
 \CTEXsetup[format={\centering\zihao{-2}\heiti},beforeskip={12bp},afterskip={18bp}]{section}
 \CTEXsetup[format={\zihao{4}\songti},beforeskip={18bp},afterskip={18bp}]{subsection}
 \CTEXsetup[format={\zihao{-4}}\heiti,beforeskip={18bp},afterskip={18bp}]{subsubsection}
