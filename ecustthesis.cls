@@ -52,7 +52,7 @@
 \RequirePackage{chngcntr}
 \RequirePackage{enumitem}
 \RequirePackage{graphicx}
-\RequirePackage[nooneline,center]{caption2}
+\RequirePackage[nooneline,center]{caption}
 \RequirePackage{multirow}
 \RequirePackage{titling}
 \RequirePackage[numbers, super]{natbib}
@@ -113,7 +113,6 @@
 
 
 %  figure and table delimination
-\renewcommand{\captionlabeldelim}{~}
 \renewcommand{\captionfont}{\bf\zihao{-5}}
 \captionsetup{labelsep=quad}
 
